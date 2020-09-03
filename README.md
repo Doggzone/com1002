@@ -57,7 +57,7 @@
 ### 연락처
 
 - 교수: [도경구](http://doggzone.github.io/home), doh@hanyang.ac.kr, 제4공학관 3층 320호
-- 조교: 모지환, gugusny5758@hanyang.ac.kr, 제4공학관 3층 319호 프로그래밍언어연구실
+- 조교: 모지환, gugusny5758@gmail.com, 제4공학관 3층 319호 프로그래밍언어연구실
 
 ### 강의 비디오
 [재생목록](https://www.youtube.com/playlist?list=PL0UNsS2daHTzzRXRIWULnZv6Osu5FG-m-)
