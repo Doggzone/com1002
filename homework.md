@@ -4,6 +4,99 @@ layout: page
 title: 숙제
 ---
 
+## Homework#3 - 논리식 + 제어구조 (마감: 9월 28일 오후 5시)
+
+### 가. 윤년 확인 함수
+
+2월은 평년인지 윤년인지에 따라 각각 28일 또는 29일이 있다. 
+기본적으로 윤년은 4년마다 한 번씩 돌아오는데 오차를 줄이기 위해서 예외를 둔다. 
+윤년을 결정하는 규칙은 다음과 같다.
+
+> 4의 배수이면 윤년인데, 그 중에서 400의 배수를 제외한 100의 배수는 평년이다.
+
+예를 살펴보면,
+- 2008, 2012, 2016년은 4의 배수이고 100의 배수가 아니므로 윤년이고,
+- 1600, 2000, 2400년은 100의 배수이지만 400의 배수이므로 윤년이고,
+- 2013, 2014, 2015년은 4의 배수가 아니므로 평년이고,
+- 2100, 2200, 2300년은 100의 배수이고 400의 배수가 아니므로 평년이다.
+
+`0` 이상의 정수를 받아서 윤년이면 `True`, 평년이면 `False`를 리턴 하는 
+함수 `isleapyear`를 작성하자. 
+아래 뼈대코드의 `None` 부분을 논리식 하나만으로 대치하면 충분하다. 
+(음수 인수의 경우에는 `None`을 리턴 해야 한다.)
+
+```
+def isleapyear(year):
+    if year >= 0:
+        return None # Replace None with Boolean expression.
+    else:
+        return None
+
+# Test code
+print(isleapyear(0))     # True
+print(isleapyear(1))     # False
+print(isleapyear(4))     # True
+print(isleapyear(2010))  # False
+print(isleapyear(2011))  # False
+print(isleapyear(2012))  # True
+print(isleapyear(2013))  # False
+print(isleapyear(2016))  # True
+print(isleapyear(1900))  # False
+print(isleapyear(2000))  # True
+print(isleapyear(2020))  # True
+print(isleapyear(2100))  # False
+print(isleapyear(2200))  # False
+print(isleapyear(2400))  # True
+print(isleapyear(-2000)) # None
+```
+
+### 나. 유효 날짜 검증 함수
+
+년, 월, 일을 정수 인수로 받아서 실제로 존재하는 날짜인지 검증하는 함수 `is_valid_date`를 만들자.
+
+- 년 `year` : `0` 이상의 정수 (음수는 불허)
+- 월 `month` : `1∼12` 범위의 정수
+- 일 `day` : 1/3/5/7/8/10/12월은 `1∼31` 범위의 정수, 4/6/9/11월은 `1∼30` 범위의 정수, 2월은 평년의 경우 `1∼28` 범위의 정수, 윤년의 경우 `1∼29` 범위의 정수
+
+예를 들어, 2019년 11월 31일은 존재하지 않는 날짜이고, 2020년 2월 29일은 존재하는 날짜이다. 따라서, 완성할 날짜 검증 함수는 `is_valid_date(2019,11,31)`을 호출하면 `False`를 리턴 하고, `is_valid_date(2020,2,29)`을 호출하면 `True`를 리턴 해야 한다. 다음 뼈대코드의 논 리식의 뒷부분을 채워 넣어 검증 함수를 완성해보자. (윤년 확인은 앞 문제에서 작성한 함수를 사용해도 좋다.)
+
+```
+def is_valid_date(year,month,day):
+    return year >= 0 and 1 <= month <= 12 and \
+           None
+```
+
+### 다. 수강과목 평균 점수 계산 서비스 (과락 제외)
+
+실습 3.8에서 완성한 수강과목 평균 점수 계산 서비스 프로그램에서 점수가 60점미만이라 낙제 한 과목은 평균 계산에서 제외하고 대신 낙제한 과목의 수를 추가로 아래와 같이 프린트해달라 는 요구사항이 발생하였다. 출력 요구사항에 맞게 아래 사항을 고려하여 프로그램을 수정하자.
+
+```
+Score Average Calculator 
+How many classes? 5 
+Enter your score: 92 
+Enter your score: 78 
+Enter your score: 54 
+Enter your score: 88 
+Enter your score: 64 
+Your average score =
+1 class failed
+```
+
+실습 3.8에서 완성한 프로그램과 동일한 요령으로 평균을 계산하되, 1∼59점 사이의 점수는 낙 제이므로 평균 계산에 제외해야 한다. 위의 사례에서는 54점이 유일하게 낙제 점수이다. 따라서 마지막 줄에 1과목이 낙제임을 알려주었다.
+
+평균을 계산할 점수가 없을 때에도, 다음과 같이 낙제한 과목의 개수를 알려주어야 함에 주의 하자.
+
+```
+Score Average Calculator 
+How many classes? 2
+Enter your score: 43
+Enter your score: 59
+Your average score = 0.0 점 
+2 classes failed
+```
+
+
+
 ## Homework#2 - 대출 원리금 균등분할 상환금 계산 (마감: 9월 21일 오후 5시)
 
 ### 가. 함수 구현
