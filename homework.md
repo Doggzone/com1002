@@ -4,6 +4,59 @@ layout: page
 title: 숙제
 ---
 
+## Homework#4 - 재귀와 반복 : 자연수 계산 (마감: 10월 12일 오후 5시)
+
+### 가. 삼각수
+
+삼각수(triangular number)는 1, 3, 6, 10, 15, 21, ... 로서 다음과 같은 방식으로 구한다.
+
+![Tri](https://i.imgur.com/0vcij8E.png)
+
+
+삼각수를 구하는 재귀 함수 `trinum`을 작성한 다음, 
+꼬리재귀 함수와 `while` 루프 함수로 차례로 변환하자. 
+`0` 이하의 인수에 대해서는 모두 `0`을 내주어야 한다.
+
+```
+def trinum(n):
+	pass # Write your code here.
+
+# Test code
+print(trinum(1))  # 1
+print(trinum(3))  # 6
+print(trinum(6))  # 21
+print(trinum(11)) # 66
+print(trinum(0))  # 0
+print(trinum(-3)) # 0
+```
+
+### 나. 덧셈만 가지고 제곱 계산하기
+
+자연수 `n`의 제곱(square)은 첫 `n`개 홀수의 합으로 구할 수 있다. 즉,
+
+![Square](https://i.imgur.com/Dd80eYy.png)
+
+이 성질을 이용하여 덧셈만으로 정수 인수의 제곱을 계산하는 재귀 함수 `square`를 작성하고, 
+이어서 꼬리재귀 함수와 `while` 루프 함수로 변환하자. 
+그런데 음수 인수에 대해서도 제대로 작동해야 한다. 
+먼저 양수 인수만 처리한다고 가정하고 코드를 완성한 다음, 
+음수 처리에 대해서 고민하면 쉽다.  
+`n`의 제곱은 `-n`의 제곱과 동일하기 때문이다.
+정수 `n`의 절대 값은 라이브러리 내장 함수 `abs(n)`을 호출하여 구할 수 있다.
+
+```
+def square(n):
+	pass # Write your code here.
+
+# Test code
+print(square(0))  # 0
+print(square(1))  # 1
+print(square(-2)) # 4
+print(square(3))  # 9
+print(square(-4)) # 16
+print(square(5))  # 25
+```
+
 ## Homework#3 - 논리식 + 제어구조 (마감: 10월 5일 오후 5시)
 
 ### 가. 윤년 확인 함수
