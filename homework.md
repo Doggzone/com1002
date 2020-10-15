@@ -4,6 +4,123 @@ layout: page
 title: 숙제
 ---
 
+## Homework#5 - 재귀와 반복 : 정렬 (마감: 10월 22일 오후 5시)
+
+### 1. 실습문제 #5.10, #5.11, #5.12
+
+### 2. 부분리스트
+
+시퀀스의 일부를 덩어리로 만들어 내주는 공통 연산인 `s[i:j]`를 사용하면, 
+시퀀스 `s`의 인덱스 `i`부터 인덱스 `j`까지 
+연결된 시퀀스 일부(`i` 원소 포함, `j` 원소 제외)를 복사하여 만들어준다. 
+이 연산을 리스트에 한정지어 작동하도록 직접 함수로 구현하자. 
+즉, 작성할 함수 `sublist`는 리스트와 인덱스 범위를 인수로 받아서, 
+범위에 해당하는 리스트를 만들어 리턴해주면 된다. 
+`sublist(s,low,high)`를 호출한 경우, 인수 `s`는 리스트, `low`는 범위의 시작 인덱스, 
+`high`는 끝 인덱스를 나타낸다. 
+인덱스가 음수로 주어지는 경우 모두 `0`으로 처리하기로 한다. 
+이 함수는 다음 실행 사례와 같이 작동하면 된다.
+
+```
+# 테스트 코드
+s = [1,2,3,4,5]
+print("s = [1,2,3,4,5]") # 
+print("sublist(s,0,0) => [] ?", sublist(s,0,0)) # []
+print("sublist(s,0,1) => [1] ?", sublist(s,0,1)) # [1]
+print("sublist(s,0,2) => [1, 2] ?", sublist(s,0,2)) # [1, 2]
+print("sublist(s,0,3) => [1, 2, 3] ?", sublist(s,0,3)) # [1, 2, 3]
+print("sublist(s,0,4) => [1, 2, 3, 4] ?", sublist(s,0,4)) # [1, 2, 3, 4]
+print("sublist(s,0,5) => [1, 2, 3, 4, 5] ?", sublist(s,0,5)) # [1, 2, 3, 4, 5]
+print("sublist(s,0,6) => [1, 2, 3, 4, 5] ?", sublist(s,0,6)) # [1, 2, 3, 4, 5]
+print("sublist(s,1,1) => [] ?", sublist(s,1,1)) # []
+print("sublist(s,1,2) => [2] ?", sublist(s,1,2)) # [2]
+print("sublist(s,1,3) => [2, 3] ?", sublist(s,1,3)) # [2, 3]
+print("sublist(s,1,4) => [2, 3, 4] ?", sublist(s,1,4)) # [2, 3, 4]
+print("sublist(s,1,5) => [2, 3, 4, 5] ?", sublist(s,1,5)) # [2, 3, 4, 5]
+print("sublist(s,1,6) => [2, 3, 4, 5] ?", sublist(s,1,6)) # [2, 3, 4, 5]
+print("sublist(s,2,2) => [] ?", sublist(s,2,2)) # []
+print("sublist(s,2,3) => [3] ?", sublist(s,2,3)) # [3]
+print("sublist(s,2,4) => [3, 4] ?", sublist(s,2,4)) # [3, 4]
+print("sublist(s,2,5) => [3, 4, 5] ?", sublist(s,2,5)) # [3, 4, 5]
+print("sublist(s,2,6) => [3, 4, 5] ?", sublist(s,2,6)) # [3, 4, 5]
+print("sublist(s,3,3) => [] ?", sublist(s,3,3)) # []
+print("sublist(s,3,4) => [4] ?", sublist(s,3,4)) # [4]
+print("sublist(s,3,5) => [4, 5] ?", sublist(s,3,5)) # [4, 5]
+print("sublist(s,3,6) => [4, 5] ?", sublist(s,3,6)) # [4, 5]
+print("sublist(s,5,2) => [] ?", sublist(s,5,2)) # []
+print("sublist(s,-3,-2) => [] ?", sublist(s,-3,-2)) # []
+```
+이 작업을 완수하기 위해서 앞부분 떼어내는 작업과 
+뒷부분 떼어내는 작업을 분리하여 따로 함수를 만든 다음, 
+`sublist` 함수는 이 두 함수를 잇달아 호출하여 작업을 수행할 수 있도록 하자.
+
+#### 가. `drop_before` 함수
+
+앞부분을 떼어내는 함수를 먼저 만들자. 
+리스트 `s`와 인덱스 `index`를 인수로 받아서 `index` 앞에 있는 원소들 제거한 
+나머지 리스트를 내주는 함수 `drop_before`는 다음과 같이 작성할 수 있다. 
+이 함수는 저절로 꼬리재귀 형태가 되었다. 
+이 함수를 이해한 다음, `while` 루프 버전으로 변환하여 완성하자.
+
+```
+def drop_before(s,index):
+    if s != [] and index > 0:
+        return drop_before(s[1:],index-1) 
+    else:
+        return s
+
+# 테스트 코드
+s = [1,2,3,4,5]
+print("s = [1,2,3,4,5]")
+print("drop_before(s,0) =", drop_before(s,0)) # [1, 2, 3, 4, 5]
+print("drop_before(s,1) =", drop_before(s,1)) # [2, 3, 4, 5]
+print("drop_before(s,2) =", drop_before(s,2)) # [3, 4, 5]
+print("drop_before(s,3) =", drop_before(s,3)) # [4, 5]
+print("drop_before(s,4) =", drop_before(s,4)) # [5]
+print("drop_before(s,5) =", drop_before(s,5)) # []
+print("drop_before(s,6) =", drop_before(s,6)) # []
+print("drop_before(s,-3) =", drop_before(s,-3)) # [1, 2, 3, 4, 5]
+print("drop_before([],4) =", drop_before([],4)) # []
+```
+
+#### 나. `take_before` 함수
+
+이번에는 뒷부분을 떼어내는 함수를 만들 차례이다. 
+리스트 `s`와 인덱스 `index`를 인수로 받아서 `index` 뒤에 있는 원소를 제거한 
+(`index` 원소도 제거 대상) 나머지 리스트를 내주는 함수 `take_before`를 
+재귀 함수, 꼬리재귀 함수, `while` 문 함수 차례로 각각 작성하자. 
+이 함수는 다음 실행 사례와 같이 작동하면 된다.
+
+```
+# 테스트 코드
+s = [1,2,3,4,5]
+print("take_before(s,0) =", take_before(s,0)) # []
+print("take_before(s,1) =", take_before(s,1)) # [1]
+print("take_before(s,2) =", take_before(s,2)) # [1, 2]
+print("take_before(s,3) =", take_before(s,3)) # [1, 2, 3]
+print("take_before(s,4) =", take_before(s,4)) # [1, 2, 3, 4]
+print("take_before(s,5) =", take_before(s,5)) # [1, 2, 3, 4, 5]
+print("take_before(s,6) =", take_before(s,6)) # [1, 2, 3, 4, 5]
+print("take_before([],4) =", take_before([],4)) # []
+print("take_before(s,-3) =", take_before(s,-3)) # []
+```
+
+####  다. sublist 함수
+
+위에서 작성한 `drop_before`와 `take_before`를 사용하여 
+다음 형식에 맞추어 `sublist` 함수를 완성하자.
+
+```
+def sublist(s,low,high): 
+    if low < 0: low = 0 
+    if high < 0: high = 0 
+    if low <= high:
+		return None # Write your expression here. 
+	else:
+		return []
+```
+
+
 ## Homework#4 - 재귀와 반복 : 자연수 계산 (마감: 10월 12일 오후 5시)
 
 ### 가. 삼각수
