@@ -4,6 +4,85 @@ layout: page
 title: 숙제
 ---
 
+## Homework#6 - 재귀와 반복 : 검색 (마감: 10월 26일 오후 5시)
+
+### 1. 중복 골라내기
+
+문자열 인수를 받아서 2번 이상 나온 문자를 리스트로 모아서 내주는 함수 `collect_ dups`를 다음 틀에 맞추어 작성하자.
+
+```
+def collect_dups(s):
+    singles = ""
+    duplicates = []
+    pass # Write your for-loop here.
+    return duplicates
+
+# Test code
+print(collect_dups("sophisticated"))
+# ['s', 'i', 't']
+print(collect_dups("I'm no angel."))
+# [' ', 'n']
+print(collect_dups("Stay Hungry. Stay Foolish."))
+# ['y', ' ', 'S', 't', 'a', 'o', '.']
+print(collect_dups("Your time is limited, so don't waste it living someone else's life."))
+# [' ', 'i', 'm', 't', 'e', 's', 'o', 'd', 'l', 'n', "'"]
+```
+
+### 2. 아나그램 확인
+
+단어를 구성하고 있는 문자의 순서를 바꾸어 다른 단어가 되면, 이 두 단어를 아나그램(anagram)이라고 한다. 아나그램의 사례 몇 개만 들어보면 다음과 같다.
+
+```
+"silent" "listen" 
+"elvis" "lives" 
+"restful" "fluster" 
+"문전박대" "대박전문"
+```
+
+두 문자열이 아나그램인지 확인하여 맞으면 `True`, 맞지 않으면 `False`를 리턴해 주는 함수를 아래 뼈대코드에 맞추어 작성하자(`find` 메소드는 허용, `sort()` 메소드는 불허).
+
+```
+def isanagram(word1,word2):
+    while word1 != '':
+        if word1[0] in word2:
+            pass # write your code here.
+        else:
+            return False
+    return word2 == ''
+
+# Test code
+print(isanagram('silent','listen'))     # True
+print(isanagram('silent','listens'))    # False
+print(isanagram('elvis','lives'))       # True
+print(isanagram('restful','fluster'))   # True
+print(isanagram('restfully','fluster')) # False
+```
+
+### 3. 정렬된 리스트에서 가장 넓은 간격 찾기
+
+정렬된 정수 리스트를 인수로 받아서 인접한 수의 크기 차이가 가장 큰 두 수를 찾 아서 그 위치와 차이를 튜플로 내주는 함수 `search_widest_gap`을 작성하자. 예를 들어 정렬된 리스트 `[3,5,8,20,22]`의 인접한 수의 크기 차이가 가장 큰 두 수 는 `8`, `20`이다. 이 경우 위치는 앞 수의 인덱스인 `2`이며, 두 수의 차이는 `12`이다. `[3,5,8,20,22,34,37,40]`과 같이 동률이 있는 경우는 앞에 작은 인덱스를 선택한 다. 리스트는 항상 정렬되어 있다고 가정한다. 실행 사례는 몇 개만 살펴보면 다음과 같다.
+```
+# Test code
+print(search_widest_gap([]))                     # (None, 0)
+print(search_widest_gap([3]))                    # (0, 0)
+print(search_widest_gap([3,5,8,20,22]))          # (2, 12)
+print(search_widest_gap([3,5,8,20,22,34,37,40])) # (2, 12)
+```
+다음 테스트 함수를 호출하여 잘 작동하는지 확인해 보자.
+
+```
+import random
+def testsearch_widest_gap():
+    db = random.sample(range(500),100)
+    print("Searching the widest gap...")
+    db.sort()
+    print(db)
+    index, gap = search_widest_gap(db)
+    print("The widest gap is:", gap)
+    print("between", db[index], "and", db[index+1])
+    print("at", index)
+```
+
 ## Homework#5 - 재귀와 반복 : 정렬 (마감: 10월 22일 오후 5시)
 
 ### 1. 실습문제 #5.10, #5.11, #5.12
