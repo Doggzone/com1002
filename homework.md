@@ -4,6 +4,46 @@ layout: page
 title: 숙제
 ---
 
+## Homework#7 - 표채워풀기 (마감: 11월 19일 오후 5시)
+
+### 설탕 최적 배송
+
+봉달은 설탕을 인터넷으로 주문받아 포장하여 배송하는 일을 관장하고 있다. 설탕은 봉지에 포장되어 있으며, 봉지는 2kg, 3kg, 5kg짜리의 세 종류가 있다. 주문은 2kg 이상, kg 단위로만 받는다. 회사의 배송 원칙은 봉지의 수가 최소가 되도록 포장하는 것 이다. 예를 들어, 18kg을 주문받았다고 하자. 3kg 봉지 6개를 포장해도 18kg가 되지 만, 5kg 봉지 3개와 3kg 봉지 1개를 포장하면 봉지 4개만으로 18kg를 포장할 수 있다. 주문 양을 kg 단위로 받아서 최소 봉지 개수를 리턴하는 minbags 함수를 다음과 같이 재귀로 작성하였다.
+
+```
+def minbags(n):
+    if n > 1:
+        if n == 2 or n == 3 or n == 5:
+            return 1
+        else:
+            smallest = minbags(n-2)
+            if n > 4:
+                smallest = min(smallest, minbags(n-3))
+            if n > 6:
+                smallest = min(smallest, minbags(n-5))
+        return 1 + smallest
+    else:
+        return 0
+```
+
+이 함수를 이해한 다음, 다음 테스트 함수로 실행해 보자. 인수의 크기가 증가함에 따 라 실행시간이 기하급수적으로 증가하여 실용적으로 사용할 수 없다.
+
+```
+def run_minbags(n):
+    from time import perf_counter
+    start = perf_counter()
+    answer = minbags(n)
+    finish = perf_counter()
+    print("minbags(", n, ") => ", answer, sep="")
+    print(round(finish-start,1), "seconds")
+```
+
+실행 시간이 기하급수적으로 증가하는 이유는 중복 계산이 기하급수적으로 증가하기 때문이다. 중복 계산이 발생하지 않도록 표채워풀기로 이 함수를 재작성하자.
+
+
+
+
+
 ## Homework#6 - 재귀와 반복 : 검색 (마감: 10월 26일 오후 5시)
 
 ### 1. 중복 골라내기
